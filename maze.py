@@ -22,8 +22,8 @@ def print_maze(maze, avatar, goal):
 
 
 def move(ava, maze):
-    """change position of avitar"""
-    # add code to move  avitar
+    """change position of avatar"""
+    # add code to move  avatar
     pass
 
 
