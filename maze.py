@@ -11,7 +11,7 @@ goal = (1, 3, "G")  # row colum Representation
 MAZE = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
 
 
-def print_maze(maze, avitar, goal):
+def print_maze(maze, avatar, goal):
     """prints out maze to standard io
     -----
     - AG-
@@ -21,8 +21,8 @@ def print_maze(maze, avitar, goal):
     pass
 
 
-def move(avi, maze):
-    """change possition of avitar"""
+def move(ava, maze):
+    """change position of avitar"""
     # add code to move  avitar
     pass
 

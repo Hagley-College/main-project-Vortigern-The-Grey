@@ -1,44 +1,47 @@
-""" Title:  
-Author:  
-Date: 
-Version:  
-Purpose:    
-""" 
+"""
+Title:
+Author:
+Date:
+Version:
+Purpose:
+"""
+
 
 class Maze:
-  """A 2 dimensional maze """
-  avatar = (1,2,'A') #row colum Representation
-  goal = (1,3,'G') #row colum Representation
-  MAZE = [[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1]]
-  
-  def __init__():
-    pass
+    """A 2 dimensional maze"""
 
-  def print_maze(self,maze,avitar,goal):
-    """ prints out maze to standard io
-      -----
-      - AG-
-      -----
-    """    
-    #add code to print out maze
-    pass
-  
-  def move(self,row,col):
-    """ change possition of avitar
-    """   
-    #add code to move  avitar
-    pass
+    avatar = (1, 2, "A")  # row colum Representation
+    goal = (1, 3, "G")  # row colum Representation
+    MAZE = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
 
-  def collision(self, object_a,object_b):
-    return  object_a[0]==object_b[0] and object_a[1]==object_b[1]
+    def __init__():
+        pass
+
+    def print_maze(self, maze, avitar, goal):
+        """prints out maze to standard io
+        -----
+        - AG-
+        -----
+        """
+        # add code to print out maze
+        pass
+
+    def move(self, row, col):
+        """change position of avitar"""
+        # add code to move  avitar
+        pass
+
+    def collision(self, object_a, object_b):
+        return object_a[0] == object_b[0] and object_a[1] == object_b[1]
+
 
 def play_game():
-  """ main game loop
-  """ 
-  maze = Maze()
-  while not maze.collision(maze.avatar,maze.goal):
-    pass
-  print("congratulations")
-  
+    """main game loop"""
+    maze = Maze()
+    while not maze.collision(maze.avatar, maze.goal):
+        pass
+    print("congratulations")
+
+
 if __name__ == "__main__":
-  play_game()
+    play_game()
