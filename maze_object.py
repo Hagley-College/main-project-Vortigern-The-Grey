@@ -17,7 +17,7 @@ class Maze:
     def __init__():
         pass
 
-    def print_maze(self, maze, avitar, goal):
+    def print_maze(self, maze, avatar, goal):
         """prints out maze to standard io
         -----
         - AG-
@@ -27,8 +27,8 @@ class Maze:
         pass
 
     def move(self, row, col):
-        """change position of avitar"""
-        # add code to move  avitar
+        """change position of avatar"""
+        # add code to move avatar
         pass
 
     def collision(self, object_a, object_b):
