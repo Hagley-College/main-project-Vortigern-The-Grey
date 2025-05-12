@@ -26,3 +26,8 @@ def list_test(rows):
 # code for learning about list of lists
 # list_test(3)
 # list_test(10)
+
+# maze import testing
+test_maze_1 = load_maze("./mazes/1.txt")
+print(test_maze_1)
+print("Testing Complete")
