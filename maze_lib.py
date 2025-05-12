@@ -28,6 +28,6 @@ def list_test(rows):
 # list_test(10)
 
 # maze import testing
-test_maze_1 = load_maze("./mazes/1.txt")
-print(test_maze_1)
-print("Testing Complete")
+# test_maze_1 = load_maze("./mazes/1.txt")
+# print(test_maze_1)
+# print("Testing Complete")
