@@ -6,7 +6,7 @@ Version:  indev
 Purpose:  Get a engine working for file loading and tracking movement.
 """
 
-avatar = (1, 2, "A")  # row colum Representation
+avatar = (1, 2, "ඞ")  # row colum Representation
 goal = (1, 3, "G")  # row colum Representation
 MAZE = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
 
