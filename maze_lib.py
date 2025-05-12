@@ -16,18 +16,25 @@ def load_maze(file):
     return maze_list
 
 
-def list_test(rows):
-    maze = []
-    for row in range(rows):
-        maze.append([])
-    print(maze)
+def print_maze(maze):
+    """
+    prints out maze to console w/h spacing
+    -----------
+    - Matthew -
+    -----------
+    """
+    for row in maze:
+        for tile in row:
+            print(f"{tile} ", end="")
+        print()
+    pass
 
 
-# code for learning about list of lists
-# list_test(3)
-# list_test(10)
+def maze_setup(maze, goal, avatar):
+    # place goal in maze
+    maze[goal[0]][goal[1]] = goal[2]
 
-# maze import testing
-# test_maze_1 = load_maze("./mazes/1.txt")
-# print(test_maze_1)
-# print("Testing Complete")
+    # place avatar in bottom left corner
+    maze_length = len(maze)
+    maze[maze_length - 2][1] = avatar[2]
+    return maze
