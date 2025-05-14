@@ -61,25 +61,25 @@ def move(avatar, maze, direction):
 
     else:
         if direction == "up":
-            if maze[avatar[0] - 1][avatar[1]] == 1:
-                print("Can't move there bc wall")
-            else:
-                avatar[0] = avatar[0] - 1
-        elif direction == "down":
             if maze[avatar[0] + 1][avatar[1]] == 1:
                 print("Can't move there bc wall")
             else:
                 avatar[0] = avatar[0] + 1
-        elif direction == "left":
-            if maze[avatar[0]][avatar[1] - 1] == 1:
+        elif direction == "down":
+            if maze[avatar[0] - 1][avatar[1]] == 1:
                 print("Can't move there bc wall")
             else:
-                avatar[1] = avatar[1] - 1
-        elif direction == "right":
-            if maze[avatar[0]][avatar[1] + 1]:
+                avatar[0] = avatar[0] - 1
+        elif direction == "left":
+            if maze[avatar[0]][avatar[1] + 1] == 1:
                 print("Can't move there bc wall")
             else:
                 avatar[1] = avatar[1] + 1
+        elif direction == "right":
+            if maze[avatar[0]][avatar[1] - 1]:
+                print("Can't move there bc wall")
+            else:
+                avatar[1] = avatar[1] - 1
         else:
             print("like, wtf")
             print(f"value of direction variable: {direction}")
