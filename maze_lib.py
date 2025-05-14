@@ -30,14 +30,22 @@ def print_maze(maze):
     pass
 
 
-def maze_setup(maze, goal, avatar):
+def maze_setup_goal(maze, goal):
     # place goal in maze
     maze[goal[0]][goal[1]] = goal[2]
+    return maze
 
+
+def maze_setup_avatar(maze, avatar):
     # place avatar in bottom left corner
     maze_length = len(maze)
     maze[maze_length - 2][1] = avatar[2]
     return maze
+
+
+def maze_new_draw(maze_og, avatar):
+    maze_og[avatar[0]][avatar[1]] = avatar[2]
+    return maze_og
 
 
 def move(avatar, maze, direction):
@@ -77,4 +85,37 @@ def move(avatar, maze, direction):
             print(f"value of direction variable: {direction}")
             print("Fix this Matthew you worthless sack of flesh")
 
-        return maze
+        return avatar
+
+
+def play_game(avatar, goal, maze, maze_og):
+    """main game loop"""
+    win = False
+    """put maze_setup and first maze render here"""
+    maze_og = maze_setup_goal(maze_og, goal)
+    maze_first = maze_setup_avatar(maze_og, avatar)
+    print_maze(maze_first)
+    while win is False:
+        """
+        Game loop diagram
+        wait for input to set direction
+        move avatar using direction
+        create new maze using avatar and maze_og
+        draw new maze
+        """
+        # stopgap for maze input
+        direction = input("up, down, left, right \n>>>")
+
+        # move character
+        avatar = move(avatar, maze_og, direction)
+
+        # create new maze for rendering
+        maze_new = maze_new_draw(maze_og, avatar)
+
+        # draw new maze
+        print_maze(maze_new)
+
+        if int(avatar[0]) == int(goal[0]) and int(avatar[1]) == int(goal[1]):
+            win = True
+        pass
+    print("congratulations")
