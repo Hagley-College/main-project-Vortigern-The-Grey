@@ -38,3 +38,43 @@ def maze_setup(maze, goal, avatar):
     maze_length = len(maze)
     maze[maze_length - 2][1] = avatar[2]
     return maze
+
+
+def move(avatar, maze, direction):
+    """change position of avatar"""
+    if (
+        direction != "up"
+        and direction != "down"
+        and direction != "left"
+        and direction != "right"
+    ):
+        """Meant to catch all non valid direction values"""
+        print("direction not valid (up, down, left, right)")
+
+    else:
+        if direction == "up":
+            if maze[avatar[0] - 1][avatar[1]] == 1:
+                print("Can't move there bc wall")
+            else:
+                avatar[0] = avatar[0] - 1
+        elif direction == "down":
+            if maze[avatar[0] + 1][avatar[1]] == 1:
+                print("Can't move there bc wall")
+            else:
+                avatar[0] = avatar[0] + 1
+        elif direction == "left":
+            if maze[avatar[0]][avatar[1] - 1] == 1:
+                print("Can't move there bc wall")
+            else:
+                avatar[1] = avatar[1] - 1
+        elif direction == "right":
+            if maze[avatar[0]][avatar[1] + 1]:
+                print("Can't move there bc wall")
+            else:
+                avatar[1] = avatar[1] + 1
+        else:
+            print("like, wtf")
+            print(f"value of direction variable: {direction}")
+            print("Fix this Matthew you worthless sack of flesh")
+
+        return maze

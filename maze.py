@@ -14,12 +14,6 @@ goal = [2, 3, "G"]  # row colum Representation
 maze = load_maze(maze_file)
 
 
-def move(avatar, maze):
-    """change position of avatar"""
-    # add code to move  avatar
-    pass
-
-
 def play_game(avatar, goal, MAZE):
     """main game loop"""
     while not (avatar[0] == goal[0] and avatar[0] == goal[0]):
