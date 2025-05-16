@@ -16,16 +16,19 @@ def load_maze(file):
     return maze_list
 
 
-def print_maze(maze):
+def print_maze(maze, avatar):
     """
     prints out maze to console w/h spacing
     -----------
     - Matthew -
     -----------
     """
-    for row in maze:
-        for tile in row:
-            print(f"{tile} ", end="")
+    for row in range(len(maze)):
+        for tile in range(len(maze[row])):
+            if avatar[0] == row and avatar[1] == tile:
+                print(f"{avatar[2]} ", end="")
+            else:
+                print(f"{maze[row][tile]} ", end="")
         print()
     pass
 
