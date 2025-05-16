@@ -12,8 +12,7 @@ maze_file = "./mazes/1.txt"
 avatar = [1, 2, "ඞ"]  # row colum Representation
 goal = [2, 3, "G"]  # row colum Representation
 maze_og = load_maze(maze_file)
-maze = maze_og
 
 
 if __name__ == "__main__":
-    play_game(avatar, goal, maze, maze_og)
+    play_game(avatar, goal, maze_og)
