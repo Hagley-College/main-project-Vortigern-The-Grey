@@ -95,13 +95,13 @@ def move(avatar, maze, direction):
         return avatar
 
 
-def play_game(avatar, goal, maze, maze_og):
+def play_game(avatar, goal, maze_og):
     """main game loop"""
     win = False
     """put maze_setup and first maze render here"""
     maze_og = maze_setup_goal(maze_og, goal)
-    maze_first = maze_setup_avatar(maze_og, avatar)
-    print_maze(maze_first)
+    avatar = maze_setup_avatar_return(maze_og, avatar)
+    print_maze(maze_og, avatar)
     while win is False:
         """
         Game loop diagram
@@ -116,11 +116,8 @@ def play_game(avatar, goal, maze, maze_og):
         # move character
         avatar = move(avatar, maze_og, direction)
 
-        # create new maze for rendering
-        maze_new = maze_new_draw(maze_og, avatar)
-
         # draw new maze
-        print_maze(maze_new)
+        print_maze(maze_og, avatar)
 
         if int(avatar[0]) == int(goal[0]) and int(avatar[1]) == int(goal[1]):
             win = True
