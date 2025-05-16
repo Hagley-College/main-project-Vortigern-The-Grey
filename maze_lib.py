@@ -39,11 +39,11 @@ def maze_setup_goal(maze, goal):
     return maze
 
 
-def maze_setup_avatar(maze, avatar):
-    # place avatar in bottom left corner
+def maze_setup_avatar_return(maze, avatar):
     maze_length = len(maze)
-    maze[maze_length - 2][1] = avatar[2]
-    return maze
+    avatar[0] = maze_length - 2
+    avatar[1] = 1
+    return avatar
 
 
 def maze_new_draw(maze_og, avatar):
