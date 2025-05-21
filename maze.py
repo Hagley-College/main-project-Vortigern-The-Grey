@@ -9,7 +9,9 @@ Purpose:  Get a engine working for file loading and tracking movement.
 from maze_lib import *
 
 maze_file = "./mazes/1.txt"
-avatar = [1, 2, "ඞ"]  # row colum Representation
+avatar = "ඞ"
+avatar_row = 0
+avatar_column = 0
 goal = [2, 3, "G"]  # row colum Representation
 maze_og = load_maze(maze_file)
 
