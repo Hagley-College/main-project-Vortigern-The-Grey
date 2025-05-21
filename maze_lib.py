@@ -16,7 +16,7 @@ def load_maze(file):
     return maze_list
 
 
-def print_maze(maze, avatar):
+def print_maze(maze, avatar_row, avatar_column):
     """
     prints out maze to console w/h spacing
     -----------
@@ -25,8 +25,8 @@ def print_maze(maze, avatar):
     """
     for row in range(len(maze)):
         for tile in range(len(maze[row])):
-            if avatar[0] == row and avatar[1] == tile:
-                print(f"{avatar[2]} ", end="")
+            if avatar_row == row and avatar_column == tile:
+                print("ඞ ", end="")
             else:
                 print(f"{maze[row][tile]} ", end="")
         print()
@@ -39,19 +39,14 @@ def maze_setup_goal(maze, goal):
     return maze
 
 
-def maze_setup_avatar_return(maze, avatar):
-    maze_length = len(maze)
-    avatar[0] = maze_length - 2
-    avatar[1] = 1
-    return avatar
+def maze_setup_avatar_return(maze, avatar_row, avatar_column):
+    maze_height = len(maze)
+    avatar_row = maze_height - 2
+    avatar_column = 1
+    return avatar_row, avatar_column
 
 
-def maze_new_draw(maze_og, avatar):
-    maze_og[avatar[0]][avatar[1]] = avatar[2]
-    return maze_og
-
-
-def move(avatar, maze, direction):
+def move(avatar_row, avatar_column, maze, direction):
     """change position of avatar"""
     if (
         direction != "up"
@@ -64,44 +59,46 @@ def move(avatar, maze, direction):
 
     else:
         if direction == "up":
-            if maze[avatar[0] - 1][avatar[1]] == 1:
+            if maze[avatar_row - 1][avatar_column] == 1:
                 print("Can't move there bc wall")
             else:
-                avatar[0] = avatar[0] - 1
+                avatar_row = avatar_row - 1
                 print("Moved up")
         elif direction == "down":
-            if maze[avatar[0] + 1][avatar[1]] == 1:
+            if maze[avatar_row + 1][avatar_column] == 1:
                 print("Can't move there bc wall")
             else:
-                avatar[0] = avatar[0] + 1
+                avatar_row = avatar_row + 1
                 print("Moved down")
         elif direction == "right":
-            if maze[avatar[0]][avatar[1] + 1] == 1:
+            if maze[avatar_row][avatar_column + 1] == 1:
                 print("Can't move there bc wall")
             else:
-                avatar[1] = avatar[1] + 1
+                avatar_column = avatar_column + 1
                 print("Moved right")
         elif direction == "left":
-            if maze[avatar[0]][avatar[1] - 1]:
+            if maze[avatar_row][avatar_column - 1] == 1:
                 print("Can't move there bc wall")
             else:
-                avatar[1] = avatar[1] - 1
+                avatar_column = avatar_column - 1
                 print("Moved left")
         else:
             print("like, wtf")
             print(f"value of direction variable: {direction}")
             print("Fix this Matthew you worthless sack of flesh")
 
-        return avatar
+        return avatar_row, avatar_column
 
 
-def play_game(avatar, goal, maze_og):
+def play_game(avatar, avatar_row, avatar_column, goal, maze_og):
     """main game loop"""
     win = False
     """put maze_setup and first maze render here"""
     maze_og = maze_setup_goal(maze_og, goal)
-    avatar = maze_setup_avatar_return(maze_og, avatar)
-    print_maze(maze_og, avatar)
+    avatar_row, avatar_column = maze_setup_avatar_return(
+        maze_og, avatar_row, avatar_column
+    )
+    print_maze(maze_og, avatar_row, avatar_column)
     while win is False:
         """
         Game loop diagram
@@ -114,12 +111,12 @@ def play_game(avatar, goal, maze_og):
         direction = input("up, down, left, right \n>>>")
 
         # move character
-        avatar = move(avatar, maze_og, direction)
+        avatar_row, avatar_column = move(avatar_row, avatar_column, maze_og, direction)
 
         # draw new maze
-        print_maze(maze_og, avatar)
+        print_maze(maze_og, avatar_row, avatar_column)
 
-        if int(avatar[0]) == int(goal[0]) and int(avatar[1]) == int(goal[1]):
+        if int(avatar_row) == int(goal[0]) and int(avatar_column) == int(goal[1]):
             win = True
         pass
     print("congratulations")

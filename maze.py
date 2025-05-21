@@ -17,4 +17,4 @@ maze_og = load_maze(maze_file)
 
 
 if __name__ == "__main__":
-    play_game(avatar, goal, maze_og)
+    play_game(avatar, avatar_row, avatar_column, goal, maze_og)
