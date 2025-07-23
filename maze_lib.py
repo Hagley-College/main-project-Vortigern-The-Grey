@@ -8,6 +8,9 @@ Purpose:  Get a engine working for file loading and tracking movement.
 
 
 def load_maze(file):
+    """
+    loads maze from txt file as list of lists and returns it.
+    """
     maze_file = open(file, "r")
     maze_list = []
     for line in maze_file:
@@ -19,9 +22,6 @@ def load_maze(file):
 def print_maze(maze, avatar_row, avatar_column):
     """
     prints out maze to console w/h spacing
-    -----------
-    - Matthew -
-    -----------
     """
     for row in range(len(maze)):
         for tile in range(len(maze[row])):
@@ -60,6 +60,9 @@ def move(avatar_row, avatar_column, maze, direction):
     # TODO: None of this works for some reason. Basically, collisions are non-existent.
     # NOTE: It's a string. A goddamn string. I hate python.
     else:
+        """
+        big if tree for checking collisions and moving the avatar appropriately.
+        """
         if direction == "up":
             if maze[avatar_row - 1][avatar_column] == "1":
                 type(1)
@@ -86,6 +89,9 @@ def move(avatar_row, avatar_column, maze, direction):
                 avatar_column = avatar_column - 1
                 print("Moved left")
         else:
+            """
+            funny error statement if invalid direction slips through.
+            """
             print("like, wtf")
             print(f"value of direction variable: {direction}")
             print("Fix this Matthew you worthless sack of flesh")
