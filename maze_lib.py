@@ -57,27 +57,30 @@ def move(avatar_row, avatar_column, maze, direction):
         """Meant to catch all non valid direction values"""
         print("direction not valid (up, down, left, right)")
 
+    # TODO: None of this works for some reason. Basically, collisions are non-existent.
+    # NOTE: It's a string. A goddamn string. I hate python.
     else:
         if direction == "up":
-            if maze[avatar_row - 1][avatar_column] == 1:
+            if maze[avatar_row - 1][avatar_column] == "1":
+                type(1)
                 print("Can't move there bc wall")
             else:
                 avatar_row = avatar_row - 1
                 print("Moved up")
         elif direction == "down":
-            if maze[avatar_row + 1][avatar_column] == 1:
+            if maze[avatar_row + 1][avatar_column] == "1":
                 print("Can't move there bc wall")
             else:
                 avatar_row = avatar_row + 1
                 print("Moved down")
         elif direction == "right":
-            if maze[avatar_row][avatar_column + 1] == 1:
+            if maze[avatar_row][avatar_column + 1] == "1":
                 print("Can't move there bc wall")
             else:
                 avatar_column = avatar_column + 1
                 print("Moved right")
         elif direction == "left":
-            if maze[avatar_row][avatar_column - 1] == 1:
+            if maze[avatar_row][avatar_column - 1] == "1":
                 print("Can't move there bc wall")
             else:
                 avatar_column = avatar_column - 1
