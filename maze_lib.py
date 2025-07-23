@@ -93,7 +93,7 @@ def move(avatar_row, avatar_column, maze, direction):
         return avatar_row, avatar_column
 
 
-def play_game(avatar, avatar_row, avatar_column, goal, maze_og):
+def play_game(avatar_row, avatar_column, goal, maze_og):
     """main game loop"""
     win = False
     """put maze_setup and first maze render here"""
