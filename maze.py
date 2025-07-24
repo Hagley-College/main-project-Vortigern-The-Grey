@@ -6,7 +6,7 @@ Version:  indev
 Purpose:  Get a engine working for file loading and tracking movement.
 """
 
-from maze_lib import *
+from maze_lib import load_maze, play_game
 
 maze_file = "./mazes/1.txt"
 avatar = "ඞ"
