@@ -53,3 +53,89 @@ def draw_maze(screen, maze, avatar_row, avatar_column):
     player_x = avatar_column * TILE_SIZE
     player_y = avatar_row * TILE_SIZE
     screen.blit(PLAYER_SPRITE, (player_x, player_y))
+
+
+def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data):
+    """
+    Main Pygame game loop.
+    Handles rendering and user input for movement, using maze_lib for logic.
+    """
+    global SCREEN_WIDTH, SCREEN_HEIGHT
+
+    # Setup maze and initial avatar position using maze_lib functions
+    maze = maze_setup_goal(maze_data, goal)
+    avatar_row, avatar_column = maze_setup_avatar_return(
+        maze, initial_avatar_row, initial_avatar_column
+    )
+
+    # Determine screen dimensions based on maze size
+    maze_width = len(maze[0])
+    maze_height = len(maze)
+    SCREEN_WIDTH = maze_width * TILE_SIZE
+    SCREEN_HEIGHT = maze_height * TILE_SIZE
+
+    # Set up the display
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE)
+    pygame.display.set_caption("Escalation")
+
+    running = True
+    win = False
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                direction = ""
+                if event.key == pygame.K_UP:
+                    direction = "up"
+                elif event.key == pygame.K_DOWN:
+                    direction = "down"
+                elif event.key == pygame.K_LEFT:
+                    direction = "left"
+                elif event.key == pygame.K_RIGHT:
+                    direction = "right"
+
+                if direction:
+                    # Use the move function from maze_lib for collision and movement logic
+                    new_avatar_row, new_avatar_column = move(
+                        avatar_row, avatar_column, maze, direction
+                    )
+                    # Only update avatar position if move function indicates a change
+                    if (new_avatar_row, new_avatar_column) != (
+                        avatar_row,
+                        avatar_column,
+                    ):
+                        avatar_row, avatar_column = new_avatar_row, new_avatar_column
+                        print(
+                            f"Avatar moved to: ({avatar_row}, {avatar_column})"
+                        )  # For debugging
+
+                    # Check for win condition after moving
+                    if int(avatar_row) == int(goal[0]) and int(avatar_column) == int(
+                        goal[1]
+                    ):
+                        win = True
+                        running = False  # End game loop on win
+
+        # Fill the background
+        screen.fill(BLACK)
+
+        # Draw the maze with the current avatar position
+        draw_maze(screen, maze, avatar_row, avatar_column)
+
+        # Update the display
+        pygame.display.flip()
+
+    if win:
+        print("Congratulations! You reached the goal!")
+        # You can add a win screen or message here in Pygame
+        font = pygame.font.Font(None, 50)
+        text = font.render("YOU WIN!", True, WHITE)
+        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        screen.blit(text, text_rect)
+        pygame.display.flip()
+        pygame.time.wait(3000)  # Show win message for 3 seconds
+
+    pygame.quit()
+    sys.exit()
