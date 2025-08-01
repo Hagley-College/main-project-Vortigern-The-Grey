@@ -139,3 +139,21 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
 
     pygame.quit()
     sys.exit()
+
+
+if __name__ == "__main__":
+    # Example usage (you can integrate this with your maze.py)
+    maze_file = "./mazes/1.txt"  # Make sure you have a mazes/1.txt file
+    avatar_row = 0
+    avatar_column = 0
+    goal = [2, 3, "G"]  # Example goal: row 2, column 3
+
+    # Load the maze using maze_lib
+    try:
+        loaded_maze = load_maze(maze_file)
+    except FileNotFoundError:
+        print(f"Error: Maze file '{maze_file}' not found.")
+        print("Please create a 'mazes' directory and a '1.txt' file inside it.")
+        sys.exit()
+
+    pygame_game_loop(avatar_row, avatar_column, goal, loaded_maze)
