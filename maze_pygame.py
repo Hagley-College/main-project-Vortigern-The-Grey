@@ -95,6 +95,9 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
                     direction = "left"
                 elif event.key == pygame.K_RIGHT:
                     direction = "right"
+                elif event.key == pygame.K_ESCAPE or event.key == pygame.K_q:
+                    print("Exiting game...")
+                    running = False
 
                 if direction:
                     # Use the move function from maze_lib for collision and movement logic
