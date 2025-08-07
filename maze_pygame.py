@@ -134,7 +134,7 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
         print("Congratulations! You reached the goal!")
         # You can add a win screen or message here in Pygame
         font = pygame.font.Font(None, 50)
-        text = font.render("YOU WIN!", True, WHITE)
+        text = font.render("YOU WIN!", True, (205, 214, 244))
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(text, text_rect)
         pygame.display.flip()
