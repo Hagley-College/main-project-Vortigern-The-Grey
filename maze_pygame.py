@@ -138,7 +138,7 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(text, text_rect)
         pygame.display.flip()
-        pygame.time.wait(3000)  # Show win message for 3 seconds
+        pygame.time.wait(1000)  # Show win message for 3 seconds
 
     pygame.quit()
     sys.exit()
