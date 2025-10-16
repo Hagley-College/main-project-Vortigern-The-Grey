@@ -5,7 +5,7 @@ from maze_lib import load_maze, maze_setup_goal, maze_setup_avatar_return, move
 # Initialize Pygame
 pygame.init()
 
-# Screen dimensions
+# Screen dimensions (Could tweak depending on device)
 TILE_SIZE = 32
 SCREEN_WIDTH = 0
 SCREEN_HEIGHT = 0
@@ -14,13 +14,14 @@ SCREEN_HEIGHT = 0
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-# Load sprites from /sprites folder
+# Load required sprites from /sprites folder
 try:
     WALL_SPRITE = pygame.image.load("sprites/wall.png")
     PLAYER_SPRITE = pygame.image.load("sprites/player.png")
     PATH_SPRITE = pygame.image.load("sprites/path.png")
     GOAL_SPRITE = pygame.image.load("sprites/goal.png")
 except pygame.error as e:
+    # If sprites are unable to be loaded/do not exist, exit with debug error.
     print(f"Error loading sprites: {e}")
     print(
         "Please ensure 'wall.png', 'player.png', 'path.png', and 'goal.png' are in the /sprites directory."
@@ -34,7 +35,9 @@ def draw_maze(screen, maze, avatar_row, avatar_column):
     Renders path/wall/goal first, then the player on top for transparency effect.
     """
 
-    for row_idx, row in enumerate(maze):
+    for row_idx, row in enumerate(
+        maze
+    ):  # Iterates through each cell in maze object to render sprites
         for col_idx, tile in enumerate(row):
             x = col_idx * TILE_SIZE
             y = row_idx * TILE_SIZE
@@ -46,7 +49,7 @@ def draw_maze(screen, maze, avatar_row, avatar_column):
             elif tile == "G":  # Goal
                 screen.blit(GOAL_SPRITE, (x, y))
             else:
-                # Fallback for unknown tiles, might draw a path sprite
+                # Fallback for unknown tiles, draws a path sprite
                 screen.blit(PATH_SPRITE, (x, y))
 
     # After drawing all background tiles, draw the player on top
@@ -83,10 +86,13 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
 
     while running:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if (
+                event.type == pygame.QUIT
+            ):  # Handles game quitting via completion of the maze
                 running = False
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:  # Handles all relevant keystrokes
                 direction = ""
+                # Direction handling
                 if event.key == pygame.K_UP:
                     direction = "up"
                 elif event.key == pygame.K_DOWN:
@@ -99,7 +105,7 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
                     print("Exiting game...")
                     running = False
 
-                if direction:
+                if direction:  # Triggers if direction relevant key was pressed
                     # Use the move function from maze_lib for collision and movement logic
                     new_avatar_row, new_avatar_column = move(
                         avatar_row, avatar_column, maze, direction
@@ -132,29 +138,28 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
 
     if win:
         print("Congratulations! You reached the goal!")
-        # You can add a win screen or message here in Pygame
+        # Add actual win message printed on pygame window
         font = pygame.font.Font(None, 50)
         text = font.render("YOU WIN!", True, (205, 214, 244))
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(text, text_rect)
         pygame.display.flip()
-        pygame.time.wait(1000)  # Show win message for 3 seconds
+        pygame.time.wait(1000)  # Show win message for 1 second
 
     pygame.quit()
     sys.exit()
 
 
 if __name__ == "__main__":
-    # Example usage (you can integrate this with your maze.py)
-    maze_file = "./mazes/1.txt"  # Make sure you have a mazes/1.txt file
+    maze_file = "./mazes/1.txt"  # Make sure maze text file matches this
     avatar_row = 0
     avatar_column = 0
-    goal = [2, 3, "G"]  # Example goal: row 2, column 3
+    goal = [2, 3, "G"]  # Example goal: row 2, column 3 (Change depending on maze used)
 
     # Load the maze using maze_lib
     try:
         loaded_maze = load_maze(maze_file)
-    except FileNotFoundError:
+    except FileNotFoundError:  # Exit if maze file cannot be loaded
         print(f"Error: Maze file '{maze_file}' not found.")
         print("Please create a 'mazes' directory and a '1.txt' file inside it.")
         sys.exit()
