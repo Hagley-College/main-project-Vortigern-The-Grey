@@ -9,7 +9,7 @@ Purpose:  Get a engine working for file loading and tracking movement.
 
 def load_maze(file):
     """
-    loads maze from txt file as list of lists and returns it.
+    Loads maze from txt file and returns it as a list of lists.
     """
     maze_file = open(file, "r")
     maze_list = []
@@ -21,25 +21,32 @@ def load_maze(file):
 
 def print_maze(maze, avatar_row, avatar_column):
     """
-    prints out maze to console w/h spacing
+    Prints out maze and avatar to console with spacing (No longer needed, use pygame frontend)
     """
     for row in range(len(maze)):
         for tile in range(len(maze[row])):
             if avatar_row == row and avatar_column == tile:
-                print("ඞ ", end="")
+                print("ඞ ", end="")  # Hardcoded avatar character for humour
             else:
-                print(f"{maze[row][tile]} ", end="")
+                print(
+                    f"{maze[row][tile]} ", end=""
+                )  # Prints maze character directly from object
         print()
     pass
 
 
 def maze_setup_goal(maze, goal):
-    # place goal in maze
+    """
+    Places goal in maze object for later comparisons
+    """
     maze[goal[0]][goal[1]] = goal[2]
     return maze
 
 
 def maze_setup_avatar_return(maze, avatar_row, avatar_column):
+    """
+    Calculates bottom left coordinate for avatar placement, not overlaping with a wall.
+    """
     maze_height = len(maze)
     avatar_row = maze_height - 2
     avatar_column = 1
@@ -47,7 +54,9 @@ def maze_setup_avatar_return(maze, avatar_row, avatar_column):
 
 
 def move(avatar_row, avatar_column, maze, direction):
-    """change position of avatar"""
+    """
+    Changes position of avatar, determining if a collision with a wall or goal will occur and accounting for that
+    """
     if (
         direction != "up"
         and direction != "down"
@@ -61,7 +70,7 @@ def move(avatar_row, avatar_column, maze, direction):
     # NOTE: It's a string. A goddamn string. I hate python.
     else:
         """
-        big if tree for checking collisions and moving the avatar appropriately.
+        Big if-else tree for checking collisions and moving the avatar appropriately.
         """
         if direction == "up":
             if maze[avatar_row - 1][avatar_column] == "1":
@@ -90,7 +99,7 @@ def move(avatar_row, avatar_column, maze, direction):
                 print("Moved left")
         else:
             """
-            funny error statement if invalid direction slips through.
+            Self-deprecating error statement if invalid direction slips through.
             """
             print("like, wtf")
             print(f"value of direction variable: {direction}")
@@ -100,9 +109,11 @@ def move(avatar_row, avatar_column, maze, direction):
 
 
 def play_game(avatar_row, avatar_column, goal, maze):
-    """main game loop"""
+    """
+    Main game loop for terminal rendering
+    """
     win = False
-    """put maze_setup and first maze render here"""
+    """Call maze_setup and render first maze"""
     maze = maze_setup_goal(maze, goal)
     avatar_row, avatar_column = maze_setup_avatar_return(
         maze, avatar_row, avatar_column
@@ -111,20 +122,21 @@ def play_game(avatar_row, avatar_column, goal, maze):
     while win is False:
         """
         Game loop diagram
-        wait for input to set direction
-        move avatar using direction
-        create new maze using avatar and maze
-        draw new maze
+        - Wait for input to set direction
+        - Move avatar using direction
+        - Mreate new maze using avatar and maze
+        - Draw new maze
         """
-        # stopgap for maze input
+        # Terminal input (will be replaced with pygame keyboard inputs)
         direction = input("up, down, left, right \n>>>")
 
-        # move character
+        # Move character based on direction
         avatar_row, avatar_column = move(avatar_row, avatar_column, maze, direction)
 
-        # draw new maze
+        # Draw new maze with new coordinates
         print_maze(maze, avatar_row, avatar_column)
 
+        # End loop if goal is reached
         if int(avatar_row) == int(goal[0]) and int(avatar_column) == int(goal[1]):
             win = True
         pass
