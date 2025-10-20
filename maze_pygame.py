@@ -161,7 +161,7 @@ if __name__ == "__main__":
         loaded_maze = load_maze(maze_file)
     except FileNotFoundError:  # Exit if maze file cannot be loaded
         print(f"Error: Maze file '{maze_file}' not found.")
-        print("Please create a 'mazes' directory and a '1.txt' file inside it.")
+        print(f"Please create a 'mazes' directory and a '{maze_file}' file inside it.")
         sys.exit()
 
     pygame_game_loop(avatar_row, avatar_column, goal, loaded_maze)
