@@ -151,10 +151,10 @@ def pygame_game_loop(initial_avatar_row, initial_avatar_column, goal, maze_data)
 
 
 if __name__ == "__main__":
-    maze_file = "./mazes/1.txt"  # Make sure maze text file matches this
+    maze_file = "./mazes/prod.txt"  # Make sure maze text file matches this
     avatar_row = 0
     avatar_column = 0
-    goal = [2, 3, "G"]  # Example goal: row 2, column 3 (Change depending on maze used)
+    goal = [1, 29, "G"]  # Example goal: row 2, column 3 (Change depending on maze used)
 
     # Load the maze using maze_lib
     try:
